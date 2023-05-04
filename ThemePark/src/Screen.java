@@ -5,20 +5,32 @@ import java.awt.event.KeyListener;
 
 
 public class Screen implements KeyListener {
+    //frame size and frame
     static private int screenX = 1420;
     static private int screenY = 1000;
+    static private boolean target = false;
     private JFrame gameScreen = new JFrame();
+    //various elements
     private JTabbedPane menu = new JTabbedPane();
-    private ImageIcon player = new ImageIcon("C:/Users/talia/OneDrive - Limestone DSB/ICS4U/ThemePark-GUI-CodeJam/ThemePark/src/sprite.png");
-    private JLabel playerIcon = new JLabel(player);
-    private Player jacob = new Player("Jacob");
+    //DELETE \/ LATER
+    public ImageIcon test = new ImageIcon("C:/Users/talia/OneDrive - Limestone DSB/ICS4U/ThemePark-GUI-CodeJam/ThemePark/src/sprite.png");
+    public JLabel testlabel = new JLabel(test);
+    public JPanel testPanel = new JPanel();
+    private ImageIcon mapImage = new ImageIcon("C:/Users/talia/OneDrive - Limestone DSB/ICS4U/ThemePark-GUI-CodeJam/ThemePark/src/game map.png");
+    public Player player = new Player("Jamie");
     private JLabel map = new JLabel();
     private JPanel main = new JPanel();
 
     public Screen(){
-        // player.setImage(player.getImage().getScaledInstance(200,300,0));
-        // playerIcon.setIcon(player);
-        main.add(jacob);
+        testPanel.add(testlabel);
+        main.setLayout(null);
+        map.setIcon(mapImage);
+        map.setBounds(0,0,screenX,screenY);
+        player.setBounds(screenX/2-player.getScaledX()/2,0,player.getScaledX(),player.getScaledY());
+        main.add(map);
+        main.add(player);
+        //move player in front
+        main.setComponentZOrder(player,0);
         menu.addTab("Main Menu", main);
         gameScreen.add(menu);
         gameScreen.setSize(screenX,screenY);
@@ -27,6 +39,29 @@ public class Screen implements KeyListener {
         gameScreen.setFocusable(true); //THIS IS IMPORTANT FOR KEYLISTENER
         gameScreen.setVisible(true);
         
+    }
+
+    public static int getScreenX(){
+        return screenX;
+    }
+
+    public static int getScreenY(){
+        return screenY;
+    }
+    //adds tab to tabbedpane
+    public void addTab(String title, Component JPanel){
+        menu.addTab(title, JPanel);
+        gameScreen.add(menu);
+    }
+
+    //trigger when player moved, incomplete
+    public void checkAddTab(Boolean tabOn, String tabTitle, Component tabPanel){
+        if(player.getX()<300 && player.getY()>screenY-player.getScaledY()*3){
+            if(tabOn=false){
+                addTab(tabTitle,tabPanel);
+                tabOn=true;
+            }
+        }
     }
 
     @Override
@@ -38,38 +73,39 @@ public class Screen implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
         switch(e.getKeyChar()){
             case 'w':
-                if(jacob.getY()>=jacob.getScaledY()){
-                    jacob.setLocation(jacob.getX(),jacob.getY()-jacob.getScaledY());
+                if(player.getY()>=player.getScaledY()){
+                    player.setLocation(player.getX(),player.getY()-player.getScaledY());
                 }
-                //System.out.println(e.getKeyChar());
                 break;
             case 'a':
-                if(jacob.getX()>=jacob.getScaledX()){
-                    jacob.setLocation(jacob.getX()-jacob.getScaledX(),jacob.getY());
+                if(player.getX()>=player.getScaledX()){
+                    player.setLocation(player.getX()-player.getScaledX(),player.getY());
                 }
-                //jacob.movePlayer(-1,0);
                 break;
             case 's':
-                if(jacob.getY()<=screenY-jacob.getScaledY()*2){
-                    jacob.setLocation(jacob.getX(),jacob.getY()+jacob.getScaledY());
+                if(player.getY()<=screenY-player.getScaledY()*2.5){
+                    player.setLocation(player.getX(),player.getY()+player.getScaledY());
                 }
-                //jacob.movePlayer(0,1);
                 break;
             case 'd':
-                if(jacob.getX()<=screenX-jacob.getScaledX()*2){
-                    jacob.setLocation(jacob.getX()+jacob.getScaledX(),jacob.getY());
+                if(player.getX()<=screenX-player.getScaledX()*2){
+                    player.setLocation(player.getX()+player.getScaledX(),player.getY());
                 }
-                //jacob.movePlayer(1,0);
                 break;
         }
+        
+        if(player.getX()<=player.getScaledX() && player.getY()>=screenY-player.getScaledY()*2){
+             addTab("Target Game",testPanel);
+        }
+        
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
+        //throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
     }
 }

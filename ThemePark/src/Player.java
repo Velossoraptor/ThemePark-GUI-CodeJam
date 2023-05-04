@@ -2,13 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Player extends JLabel {
-    static private ImageIcon playerIcon = new ImageIcon("C:/Users/talia/OneDrive - Limestone DSB/ICS4U/ThemePark-GUI-CodeJam/ThemePark/src/sprite.png");
+    static private ImageIcon playerIcon = new ImageIcon("C:/Users/talia/OneDrive - Limestone DSB/ICS4U/ThemePark-GUI-CodeJam/ThemePark/src/fGamechar1.png");
     private String name;
     private int coins = 0;
     private int lives = 3;
     private int x, y;
+    //image scaled to these
     private int scaledX=100;
-    private int scaledY = 150;
+    private int scaledY = 100;
 
     public Player(String newName){
         playerIcon.setImage(playerIcon.getImage().getScaledInstance(scaledX,scaledY,0));
@@ -42,7 +43,7 @@ public class Player extends JLabel {
     public int getLives(){
         return this.lives;
     }
-
+    //the size of the sprites image scale
     public int getScaledX(){
         return this.scaledX;
     }
