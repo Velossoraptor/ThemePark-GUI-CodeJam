@@ -19,7 +19,7 @@ public class Screen implements KeyListener {
     
     //Main game components
     private ImageIcon mapImage = new ImageIcon("C:/Users/talia/OneDrive - Limestone DSB/ICS4U/ThemePark-GUI-CodeJam/ThemePark/src/game map.png");
-    private Player player = new Player("Jamie");
+    public Player player = new Player("Jamie");
     private JLabel map = new JLabel();
     private JPanel main = new JPanel();
 
@@ -34,6 +34,7 @@ public class Screen implements KeyListener {
 
 
     public Screen(){
+        //gameScreen.add(new subMenu("Menu", true));
         testPanel.add(testlabel);
         testPanel2.add(testlabel2);
         main.setLayout(null);
