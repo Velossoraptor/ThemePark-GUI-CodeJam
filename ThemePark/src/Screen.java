@@ -12,31 +12,34 @@ public class Screen implements KeyListener {
     //toggle for if tab is already created for game
     static private int targetGame = 0;
     static private int targetGame2 = 0;
+
     //game frame
     private JFrame gameScreen = new JFrame();
+
     //game tabbed pane
-    private JTabbedPane menu = new JTabbedPane();
+    public static JTabbedPane menu = new JTabbedPane();
     
     //Main game components
     private ImageIcon mapImage = new ImageIcon("C:/Users/talia/OneDrive - Limestone DSB/ICS4U/ThemePark-GUI-CodeJam/ThemePark/src/game map.png");
-    public Player player = new Player("Jamie");
+    private Player player = new Player("Jamie");
     private JLabel map = new JLabel();
     private JPanel main = new JPanel();
 
-    //DELETE \/ LATER
-    public ImageIcon targetBG = new ImageIcon("C:/Users/talia/OneDrive - Limestone DSB/ICS4U/ThemePark-GUI-CodeJam/ThemePark/src/dunk tank.png");
-    public ImageIcon test2 = new ImageIcon("C:/Users/talia/OneDrive - Limestone DSB/ICS4U/ThemePark-GUI-CodeJam/ThemePark/src/Doggo puck.JPG");
-    public JLabel targetLabel = new JLabel(targetBG);
-    public JLabel testlabel2 = new JLabel(test2);
-    public JPanel targetPanel = new JPanel();
-    public JPanel testPanel2 = new JPanel();
+    //target game components
+    private ImageIcon targetBG = new ImageIcon("C:/Users/talia/OneDrive - Limestone DSB/ICS4U/ThemePark-GUI-CodeJam/ThemePark/src/dunk tank.png");
+    private JLabel targetLabel = new JLabel(targetBG);
+    private ClownDunk targetScreen = new ClownDunk();
+    public static JPanel targetPanel = new JPanel();
 
-
+    //coming soon components
+    public ImageIcon frogBG = new ImageIcon("C:/Users/talia/OneDrive - Limestone DSB/ICS4U/ThemePark-GUI-CodeJam/ThemePark/src/comingsoon.png");
+    public JLabel frogLabel = new JLabel(frogBG);
+    public JPanel frogPanel = new JPanel();
 
     public Screen(){
-        targetBG.setImage(targetBG.getImage().getScaledInstance(1420,1000,0));
         targetPanel.add(targetLabel);
-        testPanel2.add(testlabel2);
+        targetPanel.add(targetScreen);
+        frogPanel.add(frogLabel);
         main.setLayout(null);
 
         map.setIcon(mapImage);
@@ -73,16 +76,6 @@ public class Screen implements KeyListener {
         gameScreen.add(menu);
     }
 
-    //trigger when player moved, incomplete possibly redundant
-    public void checkAddTab(Boolean tabOn, String tabTitle, Component tabPanel){
-        if(player.getX()<300 && player.getY()>screenY-player.getScaledY()*3){
-            if(tabOn=false){
-                addTab(tabTitle,tabPanel);
-                tabOn=true;
-            }
-        }
-    }
-
     @Override
     public void keyTyped(KeyEvent e) {
         // TODO Auto-generated method stub
@@ -91,7 +84,7 @@ public class Screen implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
+        // if player is within a certain space, allow to move
         switch(e.getKeyChar()){
             case 'w':
                 if(player.getY()>=player.getScaledY()){
@@ -115,14 +108,14 @@ public class Screen implements KeyListener {
                 break;
         }
         
-        //Check if player is in correct zone
+        //Check if player is in correct zone, adds correspondent tab
         if(player.getX()<=player.getScaledX() && player.getY()>=screenY-player.getScaledY()*2 && targetGame ==0){
              addTab("Target Game",targetPanel);
              menu.setSelectedIndex(1);
              targetGame++;
         }
         if(player.getX()>=screenX-player.getScaledX()*2 && player.getY()>=screenY-player.getScaledY()*2 && targetGame2==0){
-            addTab("Filler name",testPanel2);
+            addTab("FROGGO",frogPanel);
             menu.setSelectedIndex(2);
             targetGame2++;
         }
@@ -132,7 +125,6 @@ public class Screen implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
+        // Unused
     }
 }
