@@ -24,18 +24,18 @@ public class Screen implements KeyListener {
     private JPanel main = new JPanel();
 
     //DELETE \/ LATER
-    public ImageIcon test = new ImageIcon("C:/Users/talia/OneDrive - Limestone DSB/ICS4U/ThemePark-GUI-CodeJam/ThemePark/src/sprite.png");
+    public ImageIcon targetBG = new ImageIcon("C:/Users/talia/OneDrive - Limestone DSB/ICS4U/ThemePark-GUI-CodeJam/ThemePark/src/dunk tank.png");
     public ImageIcon test2 = new ImageIcon("C:/Users/talia/OneDrive - Limestone DSB/ICS4U/ThemePark-GUI-CodeJam/ThemePark/src/Doggo puck.JPG");
-    public JLabel testlabel = new JLabel(test);
+    public JLabel targetLabel = new JLabel(targetBG);
     public JLabel testlabel2 = new JLabel(test2);
-    public JPanel testPanel = new JPanel();
+    public JPanel targetPanel = new JPanel();
     public JPanel testPanel2 = new JPanel();
 
 
 
     public Screen(){
-        //gameScreen.add(new subMenu("Menu", true));
-        testPanel.add(testlabel);
+        targetBG.setImage(targetBG.getImage().getScaledInstance(1420,1000,0));
+        targetPanel.add(targetLabel);
         testPanel2.add(testlabel2);
         main.setLayout(null);
 
@@ -117,7 +117,7 @@ public class Screen implements KeyListener {
         
         //Check if player is in correct zone
         if(player.getX()<=player.getScaledX() && player.getY()>=screenY-player.getScaledY()*2 && targetGame ==0){
-             addTab("Target Game",testPanel);
+             addTab("Target Game",targetPanel);
              menu.setSelectedIndex(1);
              targetGame++;
         }
