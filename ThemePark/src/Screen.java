@@ -109,15 +109,15 @@ public class Screen implements KeyListener {
         }
         
         //Check if player is in correct zone, adds correspondent tab
-        if(player.getX()<=player.getScaledX() && player.getY()>=screenY-player.getScaledY()*2 && targetGame ==0){
+        if(player.getX()<=player.getScaledX() && player.getY()>=screenY-player.getScaledY()*2 && targetGame <=1){
              addTab("Target Game",targetPanel);
-             menu.setSelectedIndex(1);
+             menu.setSelectedIndex(targetGame+1);
              targetGame++;
         }
-        if(player.getX()>=screenX-player.getScaledX()*2 && player.getY()>=screenY-player.getScaledY()*2 && targetGame2==0){
+        else if(player.getX()>=screenX-player.getScaledX()*2 && player.getY()>=screenY-player.getScaledY()*2 && targetGame<=1){
             addTab("FROGGO",frogPanel);
-            menu.setSelectedIndex(2);
-            targetGame2++;
+            menu.setSelectedIndex(targetGame+1);
+            targetGame++;
         }
         
 
